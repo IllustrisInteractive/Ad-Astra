@@ -1,0 +1,188 @@
+import React, { Component } from "react";
+import OnboardingNavBar from "../components/navbar_onboarding";
+import { Controller, useForm } from "react-hook-form";
+import axios from "axios";
+import bcrypt from "bcryptjs";
+import DatePicker from "react-datepicker";
+import Select from "react-select";
+
+import { useRef, useState, useEffect } from "react";
+import { collection, doc, setDoc, getDocs } from "firebase/firestore";
+import { signup } from "../modules/firebase";
+import Head from "next/head";
+
+export default function Signup() {
+  // Firebase
+  const [loading, setLoading] = useState(false);
+
+  const { control, register, handleSubmit } = useForm();
+  const city = 1;
+
+  const [email, setEmail] = useState(" ");
+
+  const [date, setDate] = useState(" ");
+
+  const handleInput = (event) => {
+    setEmail(event.target.value);
+  };
+
+  async function handleSignup(data) {
+    setLoading(true);
+    // try {
+    await signup(data);
+    // } catch {
+    // alert("Error!");
+    // }
+    setLoading(false);
+
+    console.log("Signup Successful");
+  }
+
+  const setCity = (value) => {
+    city = value;
+    setCity_id(value);
+  };
+
+  function zodiac(day, month){
+    // returns the zodiac sign according to day and month ( https://coursesweb.net/ )
+    var zodiac =['', 'Capricorn', 'Aquarius', 'Pisces', 'Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn'];
+    var last_day =['', 19, 18, 20, 20, 21, 21, 22, 22, 21, 22, 21, 20, 19];
+    return (day > last_day[month]) ? zodiac[month*1 + 1] : zodiac[month];
+   }
+
+  const upload = (data) => {
+    console.log(data);
+
+    const bMonth = data.date.getMonth() + 1;
+    const bDay = data.date.getDate();
+
+    let sign = zodiac(bDay, bMonth);
+
+    // handleSignup(data);
+  };
+
+  const handleDate = event => {
+    setDate(event.target.value);
+  }
+
+  function testFunc() {
+    alert(date.type);
+  }
+
+  return (
+    <div className="h-screen">
+      <Head>
+        <title>Sign Up | AGAP</title>
+      </Head>
+      <OnboardingNavBar />
+      <div className="mx-8 xl:mx-16 2xl:mx-64 grid grid-rows-2 lg:grid-cols-1 lg:grid-rows-none justify-items-center items-center lg:h-3/4">
+
+        <div className="row-span-1 lg:col-span-1 grow-0 p-5">
+          <div className="p-6 shadow-lg rounded-lg bg-white">
+            <form
+              className="space-y-4"
+              onSubmit={handleSubmit((data) => upload(data))}
+            >
+              <div className="grid grid-cols-2 space-x-4">
+                <div className="col-span-1 space-y-2">
+                  <label>First Name</label>
+                  <input
+                    className="shadow-inner appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="fname"
+                    type="first_name"
+                    placeholder="John"
+                    {...register("fname", { required: true })}
+                  ></input>
+                </div>
+                <div className="col-span-1 space-y-2">
+                  <label>Last Name</label>
+                  <input
+                    className="shadow-inner appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="lname"
+                    type="last_name"
+                    placeholder="Doe"
+                    {...register("lname", { required: true })}
+                  ></input>
+                </div>
+              </div>{" "}
+              {/* name div */}
+              <div>
+                <div>
+                  <div className="space-y-2">
+                    <label>Email</label>
+                    <input
+                      className="shadow-inner appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      id="email"
+                      type="email"
+                      placeholder="johndoe@agap.ph"
+                      {...register("email", { required: true })}
+                    ></input>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="space-y-2">
+                  <label>Password</label>
+                  <input
+                    className="shadow-inner appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="password"
+                    type="password"
+                    placeholder="Password"
+                    {...register("password", { required: true })}
+                  ></input>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <label>
+                  Date of Birth
+                  <br />
+                </label>
+                <Controller
+                  control={control}
+                  name="date"
+                  render={({ field }) => (
+                    <DatePicker
+                      className="shadow-inner appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      placeholderText="Select date"
+                      id="date"
+                      onChange={(date) => field.onChange(date)}
+                      selected={field.value}
+                    />
+                  )}
+                />
+              </div>
+              <div>
+                <div className="space-y-2">
+
+                </div>
+              </div>
+              <div>
+                <button
+                  class="shadow bg-blue-400 hover:bg-blue-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded w-full"
+                  type="submit"
+                >
+                  Sign up
+                </button>
+
+                <button
+                  class="shadow bg-blue-400 hover:bg-blue-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded w-full"
+                  onClick={testFunc}
+                >
+                  Test
+                </button>
+              </div>
+              <div>
+                <p className="text-sm text-gray-500 text-center">
+                  Already have an account?{" "}
+                  <a href="./login" className="hover:text-black">
+                    Login instead.
+                  </a>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

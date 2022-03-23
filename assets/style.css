@@ -1,0 +1,12 @@
+[contentEditable="true"]:empty:not(:focus):before {
+  content: attr(data-text);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
