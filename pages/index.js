@@ -1,8 +1,6 @@
 import Head from "next/head";
-import Reputation from "../components/reputation";
 import Sidebar from "../components/sidebar";
 import Navbar from "../components/navbar";
-import NewPostModal from "../components/newPostModal";
 import Weather from "../components/weather";
 import { Redirect } from "react-router-dom";
 
@@ -12,7 +10,6 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 import { NextApiRequest, NextApiResponses } from "next";
-import Post from "../components/post";
 
 import { useRef, useState } from "react";
 import {
@@ -22,7 +19,6 @@ import {
   useAuth,
   retrieveUserData,
 } from "../modules/firebase";
-import PostFactory from "../components/PostFactory";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import MobileNavBar from "../components/mobile_navbar";
 
@@ -118,16 +114,6 @@ export default function Home() {
         <div className="flex grid grid-cols-10 justify-center mx-2 xl:mx-16 2xl:mx-64 gap-x-4">
           <div className="col-span-2 hidden lg:block">
             <Sidebar user={userData} />
-          </div>
-          <div className=" col-span-10 lg:col-span-5 overflow-auto no-scrollbar">
-            <NewPostModal user={userData} />
-            <PostFactory
-              user={userData}
-              className="flex bg-white flex-col mb-3 rounded shadow mt-3"
-            />
-          </div>
-          <div className="col-span-3 hidden lg:block">
-            <Reputation user={userData} />
           </div>
         </div>
         <MobileNavBar active={1} />

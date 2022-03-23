@@ -56,17 +56,11 @@ export default function Signup() {
     const bMonth = data.date.getMonth() + 1;
     const bDay = data.date.getDate();
 
-    let sign = zodiac(bDay, bMonth);
-
-    // handleSignup(data);
+    handleSignup(data);
   };
 
   const handleDate = event => {
     setDate(event.target.value);
-  }
-
-  function testFunc() {
-    alert(date.type);
   }
 
   return (
@@ -164,12 +158,6 @@ export default function Signup() {
                   Sign up
                 </button>
 
-                <button
-                  class="shadow bg-blue-400 hover:bg-blue-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded w-full"
-                  onClick={testFunc}
-                >
-                  Test
-                </button>
               </div>
               <div>
                 <p className="text-sm text-gray-500 text-center">
