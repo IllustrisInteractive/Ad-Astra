@@ -1,9 +1,6 @@
 import Head from "next/head";
-import Reputation from "../components/reputation";
-import Sidebar from "../components/sidebar";
-import Navbar from "../components/navbar";
-import NewPostModal from "../components/newPostModal";
-import Weather from "../components/weather";
+
+
 import { Redirect } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import Select from "react-select";
@@ -13,7 +10,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 import { NextApiRequest, NextApiResponses } from "next";
-import Post from "../components/post";
+
 
 import { useRef, useState } from "react";
 import {
@@ -24,7 +21,7 @@ import {
   retrieveUserData,
   changeSettings,
 } from "../modules/firebase";
-import PostFactory from "../components/PostFactory";
+
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Image from "next/image";
 
@@ -164,7 +161,7 @@ const Settings = (props) => {
             <a href="../" className="flex col-span-2 items-center">
               <Image src="/AGAP.png" width={40} height={40} />
               <span className="self-center text-4xl font-extrabold whitespace-nowrap dark:text-white ml-2">
-                AGAP
+                AD ASTRA
               </span>
             </a>
             <div className="col-span-5"></div>

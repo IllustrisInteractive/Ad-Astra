@@ -1,7 +1,7 @@
 import Head from "next/head";
-import Sidebar from "../components/sidebar";
+
 import Navbar from "../components/navbar";
-import Weather from "../components/weather";
+
 import { Redirect } from "react-router-dom";
 
 import cookie from "js-cookie";
@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 
 import { NextApiRequest, NextApiResponses } from "next";
 
+
 import { useRef, useState } from "react";
 import {
   signup,
@@ -19,6 +20,7 @@ import {
   useAuth,
   retrieveUserData,
 } from "../modules/firebase";
+
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import MobileNavBar from "../components/mobile_navbar";
 
@@ -44,13 +46,11 @@ export default function Home() {
     fName: "John",
     lName: "Doe",
     email: "nil",
-    location: "nil",
     id: "AGAPWEBAPP",
-    points: {
-      post_points: 0,
-      comment_points: 0,
-    },
+    date: '00/00/0000',
+    zodiac: 'Gemini'
   });
+
 
 
   const auth = getAuth();
@@ -111,11 +111,21 @@ export default function Home() {
           <title>AGAP - The Social Safety Network</title>
         </Head>
         <Navbar data={userData} />
-        <div className="flex grid grid-cols-10 justify-center mx-2 xl:mx-16 2xl:mx-64 gap-x-4">
+        {/* <div className="flex grid grid-cols-10 justify-center mx-2 xl:mx-16 2xl:mx-64 gap-x-4">
           <div className="col-span-2 hidden lg:block">
             <Sidebar user={userData} />
           </div>
-        </div>
+          <div className=" col-span-10 lg:col-span-5 overflow-auto no-scrollbar">
+            <NewPostModal user={userData} />
+            <PostFactory
+              user={userData}
+              className="flex bg-white flex-col mb-3 rounded shadow mt-3"
+            />
+          </div>
+          <div className="col-span-3 hidden lg:block">
+            <Reputation user={userData} />
+          </div>
+        </div> */}
         <MobileNavBar active={1} />
       </div>
     );

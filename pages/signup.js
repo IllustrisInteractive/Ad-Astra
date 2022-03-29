@@ -17,10 +17,9 @@ export default function Signup() {
 
   const { control, register, handleSubmit } = useForm();
   const city = 1;
+  const [city_id, setCity_id] = useState(0);
 
   const [email, setEmail] = useState(" ");
-
-  const [date, setDate] = useState(" ");
 
   const handleInput = (event) => {
     setEmail(event.target.value);
@@ -42,26 +41,10 @@ export default function Signup() {
     city = value;
     setCity_id(value);
   };
-
-  function zodiac(day, month){
-    // returns the zodiac sign according to day and month ( https://coursesweb.net/ )
-    var zodiac =['', 'Capricorn', 'Aquarius', 'Pisces', 'Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn'];
-    var last_day =['', 19, 18, 20, 20, 21, 21, 22, 22, 21, 22, 21, 20, 19];
-    return (day > last_day[month]) ? zodiac[month*1 + 1] : zodiac[month];
-   }
-
   const upload = (data) => {
     console.log(data);
-
-    const bMonth = data.date.getMonth() + 1;
-    const bDay = data.date.getDate();
-
     handleSignup(data);
   };
-
-  const handleDate = event => {
-    setDate(event.target.value);
-  }
 
   return (
     <div className="h-screen">
@@ -108,7 +91,7 @@ export default function Signup() {
                       className="shadow-inner appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                       id="email"
                       type="email"
-                      placeholder="johndoe@agap.ph"
+                      placeholder="johndoe@adastra.ph"
                       {...register("email", { required: true })}
                     ></input>
                   </div>

@@ -28,6 +28,24 @@ export default function Login() {
     handleLogin(data);
   };
 
+  function checkCookie() {
+
+    const router = useRouter();
+
+    console.log(cookie.get("firstTime"))
+  
+    if(cookie.get("firstTime") === undefined) {
+
+      addFirstTimeCookie();
+
+      useEffect(() => {
+        setTimeout(() => {
+          router.push("/onboarding");
+        }, 500);
+      }, []);
+    }
+  }
+
   // For testing
   function addFirstTimeCookie() {
     cookie.set("firstTime", "1", { expires: 1 / 24 });

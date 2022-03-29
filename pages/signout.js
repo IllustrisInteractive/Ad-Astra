@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import Head from "next/head";
-import Reputation from "../components/reputation";
-import Sidebar from "../components/sidebar";
-import Navbar from "../components/navbar";
-import NewPostModal from "../components/newPostModal";
-import Weather from "../components/weather";
+
 import { Redirect } from "react-router-dom";
 
 import cookie from "js-cookie";
@@ -13,7 +9,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 import { NextApiRequest, NextApiResponses } from "next";
-import Post from "../components/post";
+
 
 import { useRef, useState } from "react";
 import {
@@ -23,7 +19,7 @@ import {
   useAuth,
   retrieveUserData,
 } from "../modules/firebase";
-import PostFactory from "../components/PostFactory";
+
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import OnboardingNavBar from "../components/navbar_onboarding";
 
