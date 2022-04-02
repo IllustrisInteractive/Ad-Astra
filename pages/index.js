@@ -1,6 +1,10 @@
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Head from "next/head";
 
 import Navbar from "../components/navbar";
+import Readings from "../components/td_readings";
 
 import { Redirect } from "react-router-dom";
 
@@ -106,26 +110,22 @@ export default function Home() {
     return <>Loading...</>;
   } else {
     return (
-      <div className="h-screen w-screen relative">
+      <div className="h-screen w-screen relative bg-[#9D50BB]">
         <Head>
-          <title>AGAP - The Social Safety Network</title>
+          <title>Ad Astra - The Social Safety Network</title>
         </Head>
         <Navbar data={userData} />
-        {/* <div className="flex grid grid-cols-10 justify-center mx-2 xl:mx-16 2xl:mx-64 gap-x-4">
-          <div className="col-span-2 hidden lg:block">
-            <Sidebar user={userData} />
-          </div>
-          <div className=" col-span-10 lg:col-span-5 overflow-auto no-scrollbar">
-            <NewPostModal user={userData} />
-            <PostFactory
-              user={userData}
-              className="flex bg-white flex-col mb-3 rounded shadow mt-3"
-            />
-          </div>
-          <div className="col-span-3 hidden lg:block">
-            <Reputation user={userData} />
-          </div>
-        </div> */}
+
+        <Router>
+            <Routes>
+                <Route path="/" element={<Readings />} />
+                {/* <Route path="/Dalgo-Card" element={} />
+                <Route path="/NFT-Gallery" element={} />
+                <Route path="*" element={} /> */}
+            </Routes>
+        </Router>
+
+        
         <MobileNavBar active={1} />
       </div>
     );
