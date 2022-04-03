@@ -53,7 +53,6 @@ export default function Signup() {
       </Head>
       <OnboardingNavBar />
       <div className="mx-8 xl:mx-16 2xl:mx-64 grid grid-rows-2 lg:grid-cols-1 lg:grid-rows-none justify-items-center items-center lg:h-3/4">
-
         <div className="row-span-1 lg:col-span-1 grow-0 p-5">
           <div className="p-6 shadow-lg rounded-lg bg-white">
             <form
@@ -129,9 +128,7 @@ export default function Signup() {
                 />
               </div>
               <div>
-                <div className="space-y-2">
-
-                </div>
+                <div className="space-y-2"></div>
               </div>
               <div>
                 <button
@@ -140,7 +137,6 @@ export default function Signup() {
                 >
                   Sign up
                 </button>
-
               </div>
               <div>
                 <p className="text-sm text-gray-500 text-center">

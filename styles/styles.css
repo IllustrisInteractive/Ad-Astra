@@ -5,3 +5,9 @@ html {
   width: 0px;
   background: transparent; /* make scrollbar transparent */
 }
+
+[contenteditable="true"]:empty:before {
+  content: attr(placeholder);
+  display: block;
+  color: #aaa;
+}
