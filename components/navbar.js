@@ -10,20 +10,51 @@ export default class Navbar extends Component {
     return (
       <>
         <div className="w-full hidden lg:block mb-3 shadow py-3">
-          <nav className="flex grid grid-cols-10 gap-x-4 mx-8 xl:mx-16 2xl:mx-64 items-center">
-            <a href="/" className="flex col-span-2 items-center">
-              <Image src="/AGAP.png" width={40} height={40} />
-              <span className="self-center text-4xl font-extrabold whitespace-nowrap dark:text-white ml-2">
-                AD ASTRA
-              </span>
-            </a>
-            <div className="col-span-5"></div>
-            <div className="col-span-3 flow-root">
-              <div className="hidden w-full md:block md:w-auto flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium items-center float-right overflow:visible">
-                <UserButton data={this.props.data} />
-              </div>
-            </div>
-          </nav>
+
+          <nav class="flex flex-wrap items-center justify-between p-4">
+          <div class="lg:order-2 w-auto lg:w-1/5 lg:text-center">
+              <a class="text-xl text-gray-800 font-semibold font-heading" href="#">
+                  
+              </a>
+          </div>
+          <div class="block lg:hidden">
+              <button class="navbar-burger flex items-center py-2 px-3 text-indigo-500 rounded border border-indigo-500">
+                  <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <title>
+                          Menu
+                      </title>
+                      <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z">
+                      </path>
+                  </svg>
+              </button>
+          </div>
+          <div class="navbar-menu hidden lg:order-1 lg:block w-full lg:w-2/5">
+          <a href="/" className="flex col-span-2 items-center">
+                    <Image src="/AGAP.png" width={40} height={40} />
+                    <span className="self-center text-4xl font-extrabold whitespace-nowrap dark:text-white ml-2">
+                      AD ASTRA
+                    </span>
+                  </a>
+          </div>
+          <div class="navbar-menu hidden lg:order-3 lg:block w-full lg:w-2/5 lg:text-right">
+              <a class="block lg:inline-block mt-4 lg:mt-0 mr-10 text-blue-900 hover:text-indigo-600" href="/">
+                  Today's Readings
+              </a>
+              <a class="block lg:inline-block mt-4 lg:mt-0 mr-10 text-blue-900 hover:text-indigo-600" href="/Compatibility">
+                  Compatibility
+              </a>
+              <a class="block lg:inline-block mt-4 lg:mt-0 text-blue-900 hover:text-indigo-600" href="/MyJournal">
+                  My Journal
+              </a>
+
+                <div className="hidden w-full md:block md:w-auto flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium items-center float-right overflow:visible">
+                  <UserButton data={this.props.data} />
+                </div>
+          </div>
+
+    
+        </nav>
+
         </div>
         <div className="relative hidden">Anchor</div>
       </>

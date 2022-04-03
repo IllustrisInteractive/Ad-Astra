@@ -1,6 +1,14 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Head from "next/head";
 
 import Navbar from "../components/navbar";
+import Readings from "../components/td_readings";
+
+import { Redirect } from "react-router-dom";
+
+import cookie from "js-cookie";
+
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
@@ -60,11 +68,22 @@ export default function Home() {
     return <>Loading...</>;
   } else {
     return (
-      <div className="h-screen w-screen relative">
+      <div className="h-screen w-screen relative bg-[#9D50BB]">
         <Head>
-          <title>AGAP - The Social Safety Network</title>
+          <title>Ad Astra - The Social Safety Network</title>
         </Head>
         <Navbar data={userData} />
+
+        <Router>
+          <Routes>
+            <Route path="/" element={<Readings />} />
+            {/* <Route path="/Dalgo-Card" element={} />
+                <Route path="/NFT-Gallery" element={} />
+                <Route path="*" element={} /> */}
+          </Routes>
+        </Router>
+
+        <MobileNavBar active={1} />
       </div>
     );
   }
