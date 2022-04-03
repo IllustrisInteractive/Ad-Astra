@@ -35,9 +35,8 @@ const firebaseConfig = {
   projectId: "ad-astra-3b593",
   storageBucket: "ad-astra-3b593.appspot.com",
   messagingSenderId: "787943428279",
-  appId: "1:787943428279:web:2f36e357463a6ef52ffd32"
+  appId: "1:787943428279:web:2f36e357463a6ef52ffd32",
 };
-
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -87,12 +86,27 @@ export async function pushComment(post, comment) {
   return ref.id;
 }
 
-function zodiac(day, month){
+function zodiac(day, month) {
   // returns the zodiac sign according to day and month ( https://coursesweb.net/ )
-  var zodiac =['', 'Capricorn', 'Aquarius', 'Pisces', 'Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 'Libra', 'Scorpio', 'Sagittarius', 'Capricorn'];
-  var last_day =['', 19, 18, 20, 20, 21, 21, 22, 22, 21, 22, 21, 20, 19];
-  return (day > last_day[month]) ? zodiac[month*1 + 1] : zodiac[month];
- }
+  var zodiac = [
+    "",
+    "Capricorn",
+    "Aquarius",
+    "Pisces",
+    "Aries",
+    "Taurus",
+    "Gemini",
+    "Cancer",
+    "Leo",
+    "Virgo",
+    "Libra",
+    "Scorpio",
+    "Sagittarius",
+    "Capricorn",
+  ];
+  var last_day = ["", 19, 18, 20, 20, 21, 21, 22, 22, 21, 22, 21, 20, 19];
+  return day > last_day[month] ? zodiac[month * 1 + 1] : zodiac[month];
+}
 
 async function push_signup(user, data) {
   const db = getFirestore();
@@ -112,6 +126,22 @@ async function push_signup(user, data) {
   }).then(() => {
     window.location.replace("/");
   });
+}
+
+export async function packageThenPost(uid, entries) {
+  const db = getFirestore();
+  const ref = collection(db, `users/${uid}/journal`);
+
+  await setDoc(doc(ref, "entries"), {
+    entries: entries,
+  });
+}
+
+export async function retrieveEntries(uid) {
+  const db = getFirestore();
+  const ref = doc(db, "users/", `${uid}/journal/entries`);
+  const snapshot = await getDoc(ref);
+  return snapshot.data();
 }
 
 export async function retrieveUserData(uid) {

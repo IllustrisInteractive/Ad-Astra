@@ -12,10 +12,11 @@ import {
   logout,
   useAuth,
   retrieveUserData,
+  packageThenPost,
+  retrieveEntries,
 } from "../modules/firebase";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import MobileNavBar from "../components/mobile_navbar";
 
 export default function Journal() {
   const [loading, setLoading] = useState(true);
@@ -61,19 +62,20 @@ export default function Journal() {
     return <>Loading...</>;
   } else {
     return (
-      <div className="h-screen w-screen relative">
+      <div className="h-screen w-screen relative bg-gradient-to-r from-journal_l to-journal_r">
         <Head>
           <title>My Journal | Ad Astra</title>
         </Head>
 
         <Navbar data={userData} />
-        <JournalUI />
+        <JournalUI userData={userData} />
       </div>
     );
   }
 }
 
 const JournalUI = (props) => {
+  const userData = props.userData;
   Date.prototype.today = function () {
     return (
       (this.getDate() < 10 ? "0" : "") +
@@ -146,6 +148,8 @@ const JournalUI = (props) => {
       );
     }
 
+    packageThenPost(userData.id, ui_data.entries);
+
     let newDate = new Date();
     let datetime = newDate.today() + " at " + newDate.timeNow();
     let ui_data_copy = structuredClone(ui_data);
@@ -201,7 +205,7 @@ const JournalUI = (props) => {
     let buttons = [];
     for (let i = 0; i < ui_data.entries.length; i++) {
       buttons.push(
-        <div className="p-3 bg-white shadow relative" key={i}>
+        <div className="p-3 bg-white shadow relative rounded" key={i}>
           <div
             className="absolute"
             id={ui_data.entries[i].id}
@@ -239,65 +243,71 @@ const JournalUI = (props) => {
     }
   }, [ui_data.entries]);
 
-  useEffect(() => {
+  useEffect(async () => {
     //retrieve data from firebase here then set as entries with setEntries
     if (!ui_data.ready) {
-      let entriesToAdd = [];
-      entriesToAdd = structuredClone(ui_data.entries);
+      let entriesToAdd = await retrieveEntries(userData.id);
       setUI({
-        entries: entriesToAdd,
+        entries: entriesToAdd.entries,
         ready: true,
-        active: entriesToAdd.length > 0 ? entriesToAdd[0].id : -1,
+        active: entriesToAdd.length > 0 ? entriesToAdd.entries[0].id : -1,
       });
     }
   }, []);
   return (
-    <div className="grid grid-cols-7 gap-x-2 mx-16 lg:mx-24 2xl:mx-64">
-      {ui_data.ready ? (
-        <>
-          <div className="col-span-2 p-3">
-            <div className="flex flex-col items-center justify-center mb-3">
-              <a onClick={addEntry}>Add new Entry</a>
+    <div className="h-3/4">
+      <div className="grid grid-cols-7 gap-x-2 mx-16 lg:mx-24 2xl:mx-64 h-full items-center">
+        {ui_data.ready ? (
+          <>
+            <div className="col-span-2 p-3">
+              <div className="flex flex-col items-center justify-center mb-3">
+                <a onClick={addEntry}>Add new Entry</a>
+              </div>
+              <div className="flex flex-col space-y-2">
+                {ui_data.entries.length > 0 ? <EntryButtons /> : ""}
+              </div>
             </div>
-            <div className="flex flex-col space-y-2">
-              {ui_data.entries.length > 0 ? <EntryButtons /> : ""}
+            <div
+              className="col-span-5 p-5 rounded bg-white"
+              style={{ maxHeight: "600px", height: "600px" }}
+            >
+              {ui_data.active < 0 ? (
+                <></>
+              ) : (
+                <>
+                  <ContentEditable
+                    className="text-2xl font-bold"
+                    html={titleText.current}
+                    onBlur={handleTitleBlur}
+                    onChange={handleTitleChange}
+                    placeholder={"Click here to edit the title"}
+                  />
+                  <p className="text-sm text-gray-400 mb-5">
+                    {ui_data.entries.find((entry) => entry.id == ui_data.active)
+                      .remote_saved ||
+                    ui_data.entries.find((entry) => entry.id == ui_data.active)
+                      .title != ""
+                      ? `Last saved on ${
+                          ui_data.entries.find(
+                            (entry) => entry.id == ui_data.active
+                          ).last_saved
+                        }.`
+                      : "Not yet saved."}
+                  </p>
+                  <ContentEditable
+                    html={contentText.current}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    placeholder={"Click here to start writing to your journal"}
+                  />
+                </>
+              )}
             </div>
-          </div>
-          <div className="col-span-5 space-y-3 p-3">
-            {ui_data.active < 0 ? (
-              <></>
-            ) : (
-              <>
-                <ContentEditable
-                  className="text-xl font-bold"
-                  html={titleText.current}
-                  onBlur={handleTitleBlur}
-                  onChange={handleTitleChange}
-                  placeholder={"Click here to edit the title"}
-                />
-                {ui_data.entries.find((entry) => entry.id == ui_data.active)
-                  .remote_saved ||
-                ui_data.entries.find((entry) => entry.id == ui_data.active)
-                  .title != ""
-                  ? `Last saved on ${
-                      ui_data.entries.find(
-                        (entry) => entry.id == ui_data.active
-                      ).last_saved
-                    }.`
-                  : "Not yet saved."}
-                <ContentEditable
-                  html={contentText.current}
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  placeholder={"Click here to start writing to your journal"}
-                />
-              </>
-            )}
-          </div>
-        </>
-      ) : (
-        <p>Loading your Journal...</p>
-      )}
+          </>
+        ) : (
+          <p>Loading your Journal...</p>
+        )}
+      </div>
     </div>
   );
 };

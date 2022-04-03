@@ -11,6 +11,10 @@ module.exports = {
         number: ["Montserrat"],
       },
       colors: {
+        journal_l: "#FC4A1A",
+        journal_r: "#F7B733",
+        readings_r: "#9D50BB",
+        readings_l: "#6E48AA",
         transparent: "transparent",
         current: "currentColor",
         //amber: colors.amber,

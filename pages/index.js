@@ -22,7 +22,6 @@ import {
 } from "../modules/firebase";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import MobileNavBar from "../components/mobile_navbar";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -68,22 +67,13 @@ export default function Home() {
     return <>Loading...</>;
   } else {
     return (
-      <div className="h-screen w-screen relative bg-[#9D50BB]">
+      <div className="h-screen w-screen relative bg-gradient-to-r from-readings_l to-readings_r">
         <Head>
-          <title>Ad Astra - The Social Safety Network</title>
+          <title>Ad Astra</title>
         </Head>
         <Navbar data={userData} />
 
-        <Router>
-          <Routes>
-            <Route path="/" element={<Readings />} />
-            {/* <Route path="/Dalgo-Card" element={} />
-                <Route path="/NFT-Gallery" element={} />
-                <Route path="*" element={} /> */}
-          </Routes>
-        </Router>
-
-        <MobileNavBar active={1} />
+        <Readings userData={userData} />
       </div>
     );
   }
