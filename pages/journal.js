@@ -247,11 +247,19 @@ const JournalUI = (props) => {
     //retrieve data from firebase here then set as entries with setEntries
     if (!ui_data.ready) {
       let entriesToAdd = await retrieveEntries(userData.id);
-      setUI({
-        entries: entriesToAdd.entries,
-        ready: true,
-        active: entriesToAdd.length > 0 ? entriesToAdd.entries[0].id : -1,
-      });
+      if (entriesToAdd) {
+        setUI({
+          entries: entriesToAdd.entries,
+          ready: true,
+          active: entriesToAdd.entries[0].id,
+        });
+      } else {
+        setUI({
+          entries: [],
+          ready: true,
+          active: -1,
+        });
+      }
     }
   }, []);
   return (
