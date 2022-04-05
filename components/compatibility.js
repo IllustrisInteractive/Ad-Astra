@@ -86,7 +86,7 @@ const Compatibility_Component = (props) => {
     return day;
   };
 
-  const getDateInFormat = () => {
+  const getMostCompatible = () => {
     let day = "";
     let month = "";
     let dayOfMonth = date.getDate();
@@ -148,13 +148,150 @@ const Compatibility_Component = (props) => {
     }
 
     return (
-      <p className="text-white font-extralight">
-        <b className="font-bold">Most Compatible</b>
-      </p>
+        <div>
+            <p className="text-white font-extralight">
+                    <b className="font-bold">Most Compatible Compatible</b>
+                </p>
+
+            <p className="mt-3 text-xl text-white font-light">
+            Surround yourself with these people.
+            </p>
+            <div className="grid grid-cols-3 space-x-3">
+                <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
+                    <div className="flex items-center justify-center mr-3">
+                        <img src="/love.png" />
+                    </div>
+                    <div className="flex flex-col">
+                        <h5 className="text-sm">Love</h5>
+                        <h4 className="text-md font-bold">{matches[0]}</h4>
+                    </div>
+                    </div>
+                    <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
+                    <div className="flex items-center justify-center mr-3">
+                        <img src="/friendship.png" />
+                    </div>
+                    <div className="flex flex-col">
+                        <h5 className="text-sm">Friendship</h5>
+                        <h4 className="text-md font-bold">{matches[1]}</h4>
+                    </div>
+                    </div>
+                    <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
+                    <div className="flex items-center justify-center mr-3">
+    >
+                    </div>
+                    <div className="flex flex-col">
+                        <h5 className="text-sm">Career</h5>
+                        <h4 className="text-md font-bold">{matches[2]}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
   };
 
-  
+  const getLeastCompatible = () => {
+    let day = "";
+    let month = "";
+    let dayOfMonth = date.getDate();
+    let year = date.getFullYear();
+    switch (date.getDay()) {
+      case 0:
+        day = "Sunday";
+        break;
+      case 1:
+        day = "Monday";
+        break;
+      case 2:
+        day = "Tuesday";
+        break;
+      case 3:
+        day = "Wednesday";
+        break;
+      case 4:
+        day = "Thursday";
+        break;
+      case 5:
+        day = "Friday";
+        break;
+      case 6:
+        day = "Saturday";
+    }
+
+    switch (date.getMonth()) {
+      case 0:
+        month = "January";
+        break;
+      case 1:
+        month = "February";
+        break;
+      case 2:
+        month = "March";
+        break;
+      case 3:
+        month = "April";
+        break;
+      case 4:
+        month = "May";
+        break;
+      case 5:
+        month = "June";
+        break;
+      case 6:
+        month = "July";
+      case 7:
+        month = "August";
+      case 8:
+        month = "September";
+      case 9:
+        month = "October";
+      case 10:
+        month = "November";
+      case 11:
+        month = "December";
+    }
+
+    return (
+        <div>
+            <p className="text-white font-extralight">
+                    <b className="font-bold">Least Compatible Compatible</b>
+                </p>
+
+            <p className="mt-3 text-xl text-white font-light">
+            Surround yourself with these people.
+            </p>
+            <div className="grid grid-cols-3 space-x-3">
+                <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
+                    <div className="flex items-center justify-center mr-3">
+                        <img src="/love.png" />
+                    </div>
+                    <div className="flex flex-col">
+                        <h5 className="text-sm">Love</h5>
+                        <h4 className="text-md font-bold">{matches[0]}</h4>
+                    </div>
+                    </div>
+                    <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
+                    <div className="flex items-center justify-center mr-3">
+                        <img src="/friendship.png" />
+                    </div>
+                    <div className="flex flex-col">
+                        <h5 className="text-sm">Friendship</h5>
+                        <h4 className="text-md font-bold">{matches[1]}</h4>
+                    </div>
+                    </div>
+                    <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
+                    <div className="flex items-center justify-center mr-3">
+    >
+                    </div>
+                    <div className="flex flex-col">
+                        <h5 className="text-sm">Career</h5>
+                        <h4 className="text-md font-bold">{matches[2]}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+  };
+
 
   return (
     <div className="mx-16 lg:mx-24 2xl:mx-64 grid grid-cols-2">
@@ -168,79 +305,8 @@ const Compatibility_Component = (props) => {
 
 
       <div className="col-span-1 flex flex-col h-full justify-center">
-
-        {/* Most Compatible */}
-
-        {getDateInFormat()} {/* date */}
-        <p className="mt-3 text-xl text-white font-light">
-            Surround yourself with these people.
-        </p>
-        <div className="grid grid-cols-3 space-x-3">
-          <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
-            <div className="flex items-center justify-center mr-3">
-              <img src="/love.png" />
-            </div>
-            <div className="flex flex-col">
-              <h5 className="text-sm">Love</h5>
-              <h4 className="text-md font-bold">{matches[0]}</h4>
-            </div>
-          </div>
-          <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
-            <div className="flex items-center justify-center mr-3">
-              <img src="/friendship.png" />
-            </div>
-            <div className="flex flex-col">
-              <h5 className="text-sm">Friendship</h5>
-              <h4 className="text-md font-bold">{matches[1]}</h4>
-            </div>
-          </div>
-          <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
-            <div className="flex items-center justify-center mr-3">
-              <img src="/career.png" />
-            </div>
-            <div className="flex flex-col">
-              <h5 className="text-sm">Career</h5>
-              <h4 className="text-md font-bold">{matches[2]}</h4>
-            </div>
-          </div>
-        </div>
-
-        {/* Least Compatible */}
-
-        {getDateInFormat()} {/* date */}
-        <p className="mt-3 text-xl text-white font-light">
-            Surround yourself with these people.
-        </p>
-        <div className="grid grid-cols-3 space-x-3">
-          <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
-            <div className="flex items-center justify-center mr-3">
-              <img src="/love.png" />
-            </div>
-            <div className="flex flex-col">
-              <h5 className="text-sm">Love</h5>
-              <h4 className="text-md font-bold">{matches[0]}</h4>
-            </div>
-          </div>
-          <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
-            <div className="flex items-center justify-center mr-3">
-              <img src="/friendship.png" />
-            </div>
-            <div className="flex flex-col">
-              <h5 className="text-sm">Friendship</h5>
-              <h4 className="text-md font-bold">{matches[1]}</h4>
-            </div>
-          </div>
-          <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
-            <div className="flex items-center justify-center mr-3">
-              <img src="/career.png" />
-            </div>
-            <div className="flex flex-col">
-              <h5 className="text-sm">Career</h5>
-              <h4 className="text-md font-bold">{matches[2]}</h4>
-            </div>
-          </div>
-        </div>
-
+        {getMostCompatible()} {/* date */}
+        {getLeastCompatible()} {/* date */}
       </div>
       
     </div>
