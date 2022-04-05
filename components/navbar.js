@@ -18,7 +18,7 @@ export default class Navbar extends Component {
               </span>
             </a>
           </div>
-          <div className="grid grid-cols-4 col-span-1 flex items-center space-x-5">
+          <div className="grid grid-cols-4 col-span-1 flex items-center space-x-5 justify-items-end">
             <a className="col-span-1 text-white" href="/">
               Today's Readings
             </a>
@@ -28,6 +28,7 @@ export default class Navbar extends Component {
             <a className="col-span-1 text-white" href="/journal">
               My Journal
             </a>
+            <UserButton data={this.props.data} />
           </div>
         </div>
         <div className="relative hidden">Anchor</div>
@@ -39,7 +40,6 @@ export default class Navbar extends Component {
 const UserButton = (props) => {
   const data = props.data;
   const [showDialog, setDialog] = useState(false);
-  let username = `${data.fName} ${data.lName}`;
   return (
     <div>
       <button
@@ -56,32 +56,9 @@ const UserButton = (props) => {
             height={25}
           />
         )}
-        <p className="mr-16 ml-3">{username}</p>
-        <svg
-          width="11"
-          height="7"
-          viewBox="0 0 11 7"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className=""
-        >
-          <path
-            d="M9.875 1.3125L5.5 5.6875L1.125 1.3125"
-            stroke="#130F26"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
       </button>
       {showDialog ? (
         <div className="absolute bg-white p-3 rounded-lg shadow space-y-2 flex flex-col z-50">
-          <button
-            className="text-lg font-bold p-2 text-left"
-            onClick={() => window.location.replace("/settings")}
-          >
-            Settings
-          </button>
           <button
             className="text-lg font-bold p-2 text-left"
             onClick={() => window.location.replace("/signout")}

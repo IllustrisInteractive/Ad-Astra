@@ -47,13 +47,20 @@ export default function Signup() {
   };
 
   return (
-    <div className="h-screen">
+    <div className="h-screen bg-gradient-to-r from-log_l via_log_m to-log_r">
       <Head>
-        <title>Sign Up | AGAP</title>
+        <title>Sign Up | Ad Astra</title>
       </Head>
       <OnboardingNavBar />
       <div className="mx-8 xl:mx-16 2xl:mx-64 grid grid-rows-2 lg:grid-cols-1 lg:grid-rows-none justify-items-center items-center lg:h-3/4">
         <div className="row-span-1 lg:col-span-1 grow-0 p-5">
+          <div className="font-bold text-4xl text-white text-center">
+            It's great to have you!
+          </div>
+          <div className="text-sm font-light text-white text-center">
+            Fill up the sign up form to create an account now.
+          </div>
+          <div style={{ height: "60px" }} />
           <div className="p-6 shadow-lg rounded-lg bg-white">
             <form
               className="space-y-4"

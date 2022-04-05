@@ -1,9 +1,12 @@
 import React, { Component, useState } from "react";
 import Image from "next/image";
+import dataJSON from "../pages/data.json";
 
 const Readings = (props) => {
   let date = new Date();
   let symbol = props.userData.zodiac;
+  let matches = [];
+  matches = dataJSON.Matches[symbol].split(" ");
   let symbols = {
     aquarius: {
       link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs%2FAQUARIUS.png?alt=media&token=510b589a-723e-41a4-bb9f-35aca3db5f55",
@@ -53,6 +56,34 @@ const Readings = (props) => {
       link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs%2FVIRGO.png?alt=media&token=58af87cc-fe0b-4461-a599-3cc0ac534c58",
       name: "Virgo",
     },
+  };
+
+  const getToday = () => {
+    let day = "";
+    let year = date.getFullYear();
+    switch (date.getDay()) {
+      case 0:
+        day = "Sunday";
+        break;
+      case 1:
+        day = "Monday";
+        break;
+      case 2:
+        day = "Tuesday";
+        break;
+      case 3:
+        day = "Wednesday";
+        break;
+      case 4:
+        day = "Thursday";
+        break;
+      case 5:
+        day = "Friday";
+        break;
+      case 6:
+        day = "Saturday";
+    }
+    return day;
   };
 
   const getDateInFormat = () => {
@@ -134,7 +165,11 @@ const Readings = (props) => {
       </div>
       <div className="col-span-1 flex flex-col h-full justify-center">
         {getDateInFormat()} {/* date */}
-        <p className="mt-3 text-xl text-white font-light">Reading here</p>
+        <p className="mt-3 text-xl text-white font-light">
+          {dataJSON.Reading[symbol][getToday()] != ""
+            ? dataJSON.Reading[symbol][getToday()]
+            : "No readings found for your zodiac sign today."}
+        </p>
         <h4 className="mt-4 text-sm font-semibold mb-2 text-white">
           Your matches today
         </h4>
@@ -145,7 +180,7 @@ const Readings = (props) => {
             </div>
             <div className="flex flex-col">
               <h5 className="text-sm">Love</h5>
-              <h4 className="text-md font-bold">Match 1</h4>
+              <h4 className="text-md font-bold">{matches[0]}</h4>
             </div>
           </div>
           <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
@@ -154,7 +189,7 @@ const Readings = (props) => {
             </div>
             <div className="flex flex-col">
               <h5 className="text-sm">Friendship</h5>
-              <h4 className="text-md font-bold">Match 2</h4>
+              <h4 className="text-md font-bold">{matches[1]}</h4>
             </div>
           </div>
           <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
@@ -163,7 +198,7 @@ const Readings = (props) => {
             </div>
             <div className="flex flex-col">
               <h5 className="text-sm">Career</h5>
-              <h4 className="text-md font-bold">Match 3</h4>
+              <h4 className="text-md font-bold">{matches[2]}</h4>
             </div>
           </div>
         </div>

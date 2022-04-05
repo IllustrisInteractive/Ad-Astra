@@ -11,6 +11,9 @@ module.exports = {
         number: ["Montserrat"],
       },
       colors: {
+        log_l: "#8A2387",
+        log_m: "#E94057",
+        log_r: "#F27121",
         journal_l: "#FC4A1A",
         journal_r: "#F7B733",
         readings_r: "#9D50BB",
