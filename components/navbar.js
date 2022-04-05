@@ -22,7 +22,7 @@ export default class Navbar extends Component {
             <a className="col-span-1 text-white" href="/">
               Today's Readings
             </a>
-            <a className="col-span-1 text-white" href="/Compatibility">
+            <a className="col-span-1 text-white" href="/compatibility">
               Compatibility
             </a>
             <a className="col-span-1 text-white" href="/journal">
