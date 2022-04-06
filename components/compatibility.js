@@ -1,8 +1,61 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useEffect} from "react";
 import Image from "next/image";
 import dataJSON from "../pages/data.json";
 
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+import {
+    signup,
+    login,
+    logout,
+    useAuth,
+    retrieveUserData,
+  } from "../modules/firebase";
+
 const Compatibility_Component = (props) => {
+
+    const [loading, setLoading] = useState(true);
+    const [currentUser, setCurrentUser] = useState();
+    const [userData, setUserData] = useState({
+      fName: "John",
+      lName: "Doe",
+      email: "nil",
+      id: "AGAPWEBAPP",
+      date: "00/00/0000",
+      zodiac: "Gemini",
+    });
+  
+    const auth = getAuth();
+  
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        setCurrentUser(user);
+        if (currentUser && loading) {
+          loadData().then((data) => {
+            setUserData(data);
+            setLoading(false);
+          });
+        }
+        // ...
+      } else {
+        window.location.replace("/login");
+  
+        // insert function
+      }
+    });
+  
+    useEffect(() => {}, []);
+  
+    async function loadData() {
+      return await retrieveUserData(currentUser.uid);
+    }
+  
+
+
+
   let date = new Date();
   let symbol = props.userData.zodiac;
   let matches = [];
@@ -257,7 +310,7 @@ const Compatibility_Component = (props) => {
                 </p>
 
             <p className="mt-3 text-xl text-white font-light">
-            Surround yourself with these people.
+            They may not be the best match for your traits
             </p>
             <div className="grid grid-cols-3 space-x-3">
                 <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
@@ -292,9 +345,19 @@ const Compatibility_Component = (props) => {
     );
   };
 
+  const testing = () => {
+      console.log('titengmalake');
+      console.log(userData.zodiac); // get zodiac
+
+    //   continue here
+  }
 
   return (
+
     <div className="mx-16 lg:mx-24 2xl:mx-64 grid grid-cols-2">
+
+    {testing()}
+
       <div className="col-span-1 flex flex-col items-center justify-center">
         <img
           src={symbols[symbol.toLowerCase()].link}
