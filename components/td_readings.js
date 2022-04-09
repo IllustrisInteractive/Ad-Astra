@@ -2,6 +2,8 @@ import React, { Component, useState } from "react";
 import Image from "next/image";
 import dataJSON from "../pages/data.json";
 
+import MessengerCustomerChat from 'react-messenger-customer-chat';
+
 const Readings = (props) => {
   let date = new Date();
   let symbol = props.userData.zodiac;
