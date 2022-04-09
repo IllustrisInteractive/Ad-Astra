@@ -12,10 +12,7 @@ export default class Navbar extends Component {
         <div className="grid grid-cols-2 py-5 mx-16 lg:mx-24 2xl:mx-64 items-center">
           <div className="col-span-1">
             <a href="/" className="flex col-span-1 items-center">
-            <Image src="/Ad-Astra-Logo.png" width={150} height={75} />
-              <span className="self-center text-2xl font-semibold whitespace-nowrap text-white ml-2">
-                ad astra
-              </span>
+              <Image src="/Ad-Astra-Logo.png" width={150} height={75} />
             </a>
           </div>
           <div className="grid grid-cols-4 col-span-1 flex items-center space-x-5 justify-items-end">
