@@ -155,7 +155,10 @@ const Readings = (props) => {
   };
 
   return (
-    <div className="mx-16 lg:mx-24 2xl:mx-64 grid grid-cols-2">
+    <div
+      className="mx-16 lg:mx-24 2xl:mx-64 grid grid-cols-2"
+      style={{ minHeight: "600px" }}
+    >
       <div className="col-span-1 flex flex-col items-center justify-center">
         <img
           src={symbols[symbol.toLowerCase()].link}
