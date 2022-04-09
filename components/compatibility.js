@@ -675,7 +675,10 @@ const Compatibility_Component = (props) => {
         <h2 className="text-white font-light text-3xl">{symbol}</h2>
       </div>
 
-      <div className="col-span-1 flex flex-col h-full justify-center">
+      <div
+        className="col-span-1 flex flex-col h-full justify-center"
+        style={{ minHeight: "600px" }}
+      >
         {getMostCompatible()} {/* date */}
         {getLeastCompatible()} {/* date */}
       </div>
