@@ -4,6 +4,8 @@ import dataJSON from "../pages/data.json";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
+import MessengerCustomerChat from 'react-messenger-customer-chat';
+
 import {
   signup,
   login,
@@ -682,6 +684,11 @@ const Compatibility_Component = (props) => {
         {getMostCompatible()} {/* date */}
         {getLeastCompatible()} {/* date */}
       </div>
+
+      <MessengerCustomerChat
+        pageId="102233909130277"
+        appId="703682774401709"
+    />,
     </div>
   );
 };

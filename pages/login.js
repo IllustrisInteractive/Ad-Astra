@@ -9,6 +9,8 @@ import cookie from "js-cookie";
 
 import { useRef, useState } from "react";
 
+import { TailSpin } from "react-loader-spinner";
+
 import { login, useAuth } from "../modules/firebase";
 import Head from "next/head";
 
