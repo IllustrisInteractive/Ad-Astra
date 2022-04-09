@@ -138,7 +138,7 @@ export default function Login() {
               </div>
               <div>
                 <button
-                  class="shadow bg-blue-400 hover:bg-blue-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded w-full"
+                  class="shadow bg-[#8A2387] hover:bg-blue-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded w-full"
                   type="submit"
                 >
                   Login

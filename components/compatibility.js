@@ -111,6 +111,360 @@ const Compatibility_Component = (props) => {
     },
   };
 
+  let symbols_black = {
+    aquarius: {
+      link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FAQUARIUS.png?alt=media&token=fdb3d83f-8913-49be-a8f8-12dcbb2f2005",
+      name: "Aquarius",
+    },
+    aries: {
+      link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FARIES.png?alt=media&token=151195ec-d409-4476-80e3-7f82aef9e4d4",
+      name: "Aries",
+    },
+    cancer: {
+      link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FCANCER.png?alt=media&token=d9d206dd-51da-4dfe-b6f7-0c6187fcdbb3",
+      name: "Cancer",
+    },
+    capricorn: {
+      link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FCAPRICORN.png?alt=media&token=b0ec4529-4832-4c46-b45f-9f98e770366d",
+      name: "Capricorn",
+    },
+    gemini: {
+      link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FGEMINI.png?alt=media&token=970cdf1c-bb73-4336-8435-3b94cd820479",
+      name: "Gemini",
+    },
+    leo: {
+      link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FLEO.png?alt=media&token=1ad40fe2-3b4b-4e4e-9bcd-68210bb97b02",
+      name: "Leo",
+    },
+    libra: {
+      link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FLIBRA.png?alt=media&token=c2d45f58-61d9-4347-b729-c7592ed0fcdb",
+      name: "Libra",
+    },
+    pisces: {
+      link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FPISCES.png?alt=media&token=d14a22f8-7daf-4f74-a655-0d9ee952a3a8",
+      name: "Pisces",
+    },
+    sagitarius: {
+      link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FSAGITARIUS.png?alt=media&token=c6b18faa-e614-4a9a-a68d-78dd88a648b3",
+      name: "Sagittarius",
+    },
+    scorpio: {
+      link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FSCORPIO.png?alt=media&token=907848c5-06ba-47e7-b7b8-00c2d59cdd8d",
+      name: "Scorpio",
+    },
+    taurus: {
+      link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FTAURUS.png?alt=media&token=ddcaee12-692f-42f3-8ad3-726ee143b371",
+      name: "Taurus",
+    },
+    virgo: {
+      link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FVIRGO.png?alt=media&token=b2222a7c-20fa-4f91-8bd6-7d25a898bb24",
+      name: "Virgo",
+    },
+  };
+
+  let z_symbols = [
+    {
+        sign: "Aquarius",
+        most_compatible: [
+            {
+                Name: "Aries",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FARIES.png?alt=media&token=151195ec-d409-4476-80e3-7f82aef9e4d4",
+            },
+        ],
+
+        least_compatible: [
+            {
+                Name: "Taurus",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FTAURUS.png?alt=media&token=ddcaee12-692f-42f3-8ad3-726ee143b371",
+            },
+
+            {
+                Name: "Scorpio",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FSCORPIO.png?alt=media&token=907848c5-06ba-47e7-b7b8-00c2d59cdd8d",
+            },
+
+            {
+                Name: "Leo",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FLEO.png?alt=media&token=1ad40fe2-3b4b-4e4e-9bcd-68210bb97b02",
+            }
+        ],
+    },
+
+    {
+        sign: "Pisces",
+        most_compatible: [
+            {
+                Name: "Scorpio",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FSCORPIO.png?alt=media&token=907848c5-06ba-47e7-b7b8-00c2d59cdd8d",
+            },
+        ],
+        least_compatible: [
+            {
+                Name: "Gemini",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FGEMINI.png?alt=media&token=970cdf1c-bb73-4336-8435-3b94cd820479",
+            },
+
+            {
+                Name: "Sagittarius",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FSAGITARIUS.png?alt=media&token=c6b18faa-e614-4a9a-a68d-78dd88a648b3",
+            },
+
+            {
+                Name: "Virgo",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FVIRGO.png?alt=media&token=b2222a7c-20fa-4f91-8bd6-7d25a898bb24",
+            }
+        ],
+    },
+
+    {
+        sign: "Aries",
+        most_compatible: [
+            {
+                Name: "Aquarius",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FAQUARIUS.png?alt=media&token=fdb3d83f-8913-49be-a8f8-12dcbb2f2005",
+            },
+        ],
+
+        least_compatible: [
+            {
+                Name: "Cancer",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FCANCER.png?alt=media&token=d9d206dd-51da-4dfe-b6f7-0c6187fcdbb3",
+            },
+
+            {
+                Name: "Capricorn",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FCAPRICORN.png?alt=media&token=b0ec4529-4832-4c46-b45f-9f98e770366d",
+            },
+
+            {
+                Name: "Libra",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FLIBRA.png?alt=media&token=c2d45f58-61d9-4347-b729-c7592ed0fcdb",
+            }
+        ],
+    },
+
+    {
+        sign: "Taurus",
+        most_compatible: [
+            {
+                Name: "Capricorn",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FCAPRICORN.png?alt=media&token=b0ec4529-4832-4c46-b45f-9f98e770366d",
+            },
+        ],
+        least_compatible: [
+            {
+                Name: "Leo",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FLEO.png?alt=media&token=1ad40fe2-3b4b-4e4e-9bcd-68210bb97b02",
+            },
+
+            {
+                Name: "Aquarius",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FAQUARIUS.png?alt=media&token=fdb3d83f-8913-49be-a8f8-12dcbb2f2005",
+            },
+
+            {
+                Name: "Scorpio",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FSCORPIO.png?alt=media&token=907848c5-06ba-47e7-b7b8-00c2d59cdd8d",
+            }
+        ],
+    },
+
+    {
+        sign: "Gemini",
+        most_compatible: [
+            {
+                Name: "Sagittarius",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FSAGITARIUS.png?alt=media&token=c6b18faa-e614-4a9a-a68d-78dd88a648b3",
+            },
+        ],
+
+        least_compatible: [
+            {
+                Name: "Virgo",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FVIRGO.png?alt=media&token=b2222a7c-20fa-4f91-8bd6-7d25a898bb24",
+            },
+
+            {
+                Name: "Pisces",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FPISCES.png?alt=media&token=d14a22f8-7daf-4f74-a655-0d9ee952a3a8",
+            },
+
+            {
+                Name: "Sagittarius",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FSAGITARIUS.png?alt=media&token=c6b18faa-e614-4a9a-a68d-78dd88a648b3",
+            }
+        ],
+    },
+
+    {
+        sign: "Cancer",
+        most_compatible: [
+            {
+                Name: "Libra",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FLIBRA.png?alt=media&token=c2d45f58-61d9-4347-b729-c7592ed0fcdb",
+            },
+        ],
+        least_compatible: [
+            {
+                Name: "Aries",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FARIES.png?alt=media&token=151195ec-d409-4476-80e3-7f82aef9e4d4",
+            },
+
+            {
+                Name: "Libra",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FLIBRA.png?alt=media&token=c2d45f58-61d9-4347-b729-c7592ed0fcdb",
+            },
+
+            {
+                Name: "Capricorn",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FCAPRICORN.png?alt=media&token=b0ec4529-4832-4c46-b45f-9f98e770366d",
+            }
+        ],
+    },
+
+    {
+        sign: "Leo",
+        most_compatible: [
+            {
+                Name: "Virgo",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FVIRGO.png?alt=media&token=b2222a7c-20fa-4f91-8bd6-7d25a898bb24",
+            },
+        ],
+
+        least_compatible: [
+            {
+                Name: "Taurus",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FTAURUS.png?alt=media&token=ddcaee12-692f-42f3-8ad3-726ee143b371",
+            },
+
+            {
+                Name: "Scorpio",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FSCORPIO.png?alt=media&token=907848c5-06ba-47e7-b7b8-00c2d59cdd8d",
+            },
+        ],
+    },
+
+    {
+        sign: "Virgo",
+        most_compatible: [
+            {
+                Name: "Leo",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FLEO.png?alt=media&token=1ad40fe2-3b4b-4e4e-9bcd-68210bb97b02",
+            }
+        ],
+
+        least_compatible: [
+            {
+                Name: "Gemini",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FGEMINI.png?alt=media&token=970cdf1c-bb73-4336-8435-3b94cd820479",
+            },
+
+            {
+                Name: "Sagittarius",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FSAGITARIUS.png?alt=media&token=c6b18faa-e614-4a9a-a68d-78dd88a648b3",
+            },
+
+            {
+                Name: "Pisces",
+                Link:  "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FPISCES.png?alt=media&token=d14a22f8-7daf-4f74-a655-0d9ee952a3a8",
+            }
+        ],
+    },
+
+    {
+        sign: "Libra",
+        most_compatible: [
+            {
+                Name: "Cancer",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FCANCER.png?alt=media&token=d9d206dd-51da-4dfe-b6f7-0c6187fcdbb3",
+            },
+        ],
+        least_compatible: [
+            {
+                Name: "Aries",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FARIES.png?alt=media&token=151195ec-d409-4476-80e3-7f82aef9e4d4",
+            },
+        ],
+    },
+    {
+        sign: "Scorpio",
+        most_compatible: [
+            {
+                Name: "Pisces",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FPISCES.png?alt=media&token=d14a22f8-7daf-4f74-a655-0d9ee952a3a8",
+            },
+        ],
+
+        least_compatible: [
+            {
+                Name: "Leo",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FLEO.png?alt=media&token=1ad40fe2-3b4b-4e4e-9bcd-68210bb97b02",
+            },
+
+            {
+                Name: "Aquarius",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FAQUARIUS.png?alt=media&token=fdb3d83f-8913-49be-a8f8-12dcbb2f2005",
+            },
+            {
+                Name: "Taurus",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FTAURUS.png?alt=media&token=ddcaee12-692f-42f3-8ad3-726ee143b371",
+            },
+        ],
+    },
+    {
+        sign: "Sagittarius",
+        most_compatible: [
+            {
+                Name: "Gemini",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FGEMINI.png?alt=media&token=970cdf1c-bb73-4336-8435-3b94cd820479",
+            },
+        ],
+
+        least_compatible: [
+            {
+                Name: "Virgo",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FVIRGO.png?alt=media&token=b2222a7c-20fa-4f91-8bd6-7d25a898bb24",
+            },
+
+            {
+                Name: "Pisces",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FPISCES.png?alt=media&token=d14a22f8-7daf-4f74-a655-0d9ee952a3a8",
+            },
+        ],
+    
+    },
+    {
+        sign: "Capricorn",
+        most_compatible: [
+            {
+                Name: "Taurus",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FTAURUS.png?alt=media&token=ddcaee12-692f-42f3-8ad3-726ee143b371",               
+            }
+        ],
+
+        least_compatible: [
+
+            {
+                Name: "Aries",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FARIES.png?alt=media&token=151195ec-d409-4476-80e3-7f82aef9e4d4",
+
+            },
+
+            {
+                Name: "Libra",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FLIBRA.png?alt=media&token=c2d45f58-61d9-4347-b729-c7592ed0fcdb",
+            },
+
+            {
+                Name: "Cancer",
+                Link: "https://firebasestorage.googleapis.com/v0/b/ad-astra-3b593.appspot.com/o/Zodiac_Signs_Black%2FCANCER.png?alt=media&token=d9d206dd-51da-4dfe-b6f7-0c6187fcdbb3",
+            },
+        ],
+    },
+]
+
+let signFind = z_symbols.find((sign) => sign.sign === symbol);
+
   const getToday = () => {
     let day = "";
     let year = date.getFullYear();
@@ -200,6 +554,10 @@ const Compatibility_Component = (props) => {
         month = "December";
     }
 
+    let signFind = z_symbols.find((sign) => sign.sign === symbol);
+
+    
+
     return (
         <div>
             <p className="text-white font-extralight">
@@ -210,33 +568,22 @@ const Compatibility_Component = (props) => {
             Surround yourself with these people.
             </p>
             <div className="grid grid-cols-3 space-x-3">
-                <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
-                    <div className="flex items-center justify-center mr-3">
-                        <img src="/love.png" />
-                    </div>
-                    <div className="flex flex-col">
-                        <h5 className="text-sm">Love</h5>
-                        <h4 className="text-md font-bold">{matches[0]}</h4>
-                    </div>
-                    </div>
-                    <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
-                    <div className="flex items-center justify-center mr-3">
-                        <img src="/friendship.png" />
-                    </div>
-                    <div className="flex flex-col">
-                        <h5 className="text-sm">Friendship</h5>
-                        <h4 className="text-md font-bold">{matches[1]}</h4>
-                    </div>
-                    </div>
-                    <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
-                    <div className="flex items-center justify-center mr-3">
-    >
-                    </div>
-                    <div className="flex flex-col">
-                        <h5 className="text-sm">Career</h5>
-                        <h4 className="text-md font-bold">{matches[2]}</h4>
-                    </div>
-                </div>
+
+              { 
+                  signFind.most_compatible.map((m_compatible) => {
+
+                    return (
+                      <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
+                          <div className="flex items-center justify-center mr-3">
+                              <img src={ m_compatible.Link } />
+                          </div>
+                          <h4 className="text-md font-bold">{m_compatible.Name}</h4>
+                      </div>
+                    );
+                })
+
+              }
+                
             </div>
         </div>
     );
@@ -313,33 +660,23 @@ const Compatibility_Component = (props) => {
             They may not be the best match for your traits
             </p>
             <div className="grid grid-cols-3 space-x-3">
-                <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
-                    <div className="flex items-center justify-center mr-3">
-                        <img src="/love.png" />
-                    </div>
-                    <div className="flex flex-col">
-                        <h5 className="text-sm">Love</h5>
-                        <h4 className="text-md font-bold">{matches[0]}</h4>
-                    </div>
-                    </div>
-                    <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
-                    <div className="flex items-center justify-center mr-3">
-                        <img src="/friendship.png" />
-                    </div>
-                    <div className="flex flex-col">
-                        <h5 className="text-sm">Friendship</h5>
-                        <h4 className="text-md font-bold">{matches[1]}</h4>
-                    </div>
-                    </div>
-                    <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
-                    <div className="flex items-center justify-center mr-3">
-    >
-                    </div>
-                    <div className="flex flex-col">
-                        <h5 className="text-sm">Career</h5>
-                        <h4 className="text-md font-bold">{matches[2]}</h4>
-                    </div>
-                </div>
+
+              
+            { 
+                  signFind.least_compatible.map((m_compatible) => {
+
+                    return (
+                      <div className="col-span-1 flex flex-row bg-white rounded-lg p-4">
+                          <div className="flex items-center justify-center mr-3">
+                              <img src={ m_compatible.Link } />
+                          </div>
+                          <h4 className="text-md font-bold">{m_compatible.Name}</h4>
+                      </div>
+                    );
+                })
+
+              }
+
             </div>
         </div>
     );
