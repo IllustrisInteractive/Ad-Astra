@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
 import defaultUser from "../assets/Profile.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -16,15 +17,18 @@ export default class Navbar extends Component {
             </a>
           </div>
           <div className="grid grid-cols-4 col-span-1 flex items-center space-x-5 justify-items-end">
-            <a className="col-span-1 text-white" href="/">
-              Today's Readings
-            </a>
-            <a className="col-span-1 text-white" href="/compatibility">
-              Compatibility
-            </a>
-            <a className="col-span-1 text-white" href="/journal">
-              My Journal
-            </a>
+            <Link href="/">
+              <a className="col-span-1 text-white">Today's Readings</a>
+            </Link>
+
+            <Link href="/compatibility">
+              <a className="col-span-1 text-white">Compatibility</a>
+            </Link>
+
+            <Link href="/journal">
+              <a className="col-span-1 text-white">My Journal</a>
+            </Link>
+
             <UserButton data={this.props.data} />
           </div>
         </div>

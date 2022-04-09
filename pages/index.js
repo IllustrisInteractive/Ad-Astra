@@ -4,6 +4,7 @@ import Head from "next/head";
 
 import Navbar from "../components/navbar";
 import Readings from "../components/td_readings";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { Redirect } from "react-router-dom";
 
@@ -22,8 +23,9 @@ import {
 } from "../modules/firebase";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Loading from "../components/loading";
 
-export default function Home() {
+const Home = (props) => {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState();
   const [userData, setUserData] = useState({
@@ -63,18 +65,35 @@ export default function Home() {
     return await retrieveUserData(currentUser.uid);
   }
 
-  if (loading) {
-    return <>Loading...</>;
-  } else {
-    return (
-      <div className="h-screen w-screen relative bg-gradient-to-r from-readings_l to-readings_r">
-        <Head>
-          <title>Ad Astra</title>
-        </Head>
-        <Navbar data={userData} />
+  return (
+    <>
+      <AnimatePresence exitBeforeEnter>
+        {loading && (
+          <motion.div key={"loading_tab"} exit={{ opacity: 0 }}>
+            <Loading duration={2000} />
+          </motion.div>
+        )}
 
-        <Readings userData={userData} />
-      </div>
-    );
-  }
-}
+        {!loading && (
+          <motion.div
+            key={"loaded"}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div className="h-screen w-screen relative bg-gradient-to-r from-readings_l to-readings_r">
+              <Head>
+                <title>Ad Astra</title>
+              </Head>
+              <Navbar data={userData} />
+
+              <Readings userData={userData} />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
+export default Home;

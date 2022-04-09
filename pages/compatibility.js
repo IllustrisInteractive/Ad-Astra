@@ -1,16 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 import Head from "next/head";
 
 import Navbar from "../components/navbar";
 import Compatibility_Component from "../components/compatibility";
 
-import { Redirect } from "react-router-dom";
-
-import cookie from "js-cookie";
-
 import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { useRef, useState } from "react";
 import {
@@ -22,6 +16,7 @@ import {
 } from "../modules/firebase";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Loading from "../components/loading";
 
 export default function Compatibility() {
   const [loading, setLoading] = useState(true);
@@ -63,17 +58,32 @@ export default function Compatibility() {
     return await retrieveUserData(currentUser.uid);
   }
 
-  if (loading) {
-    return <>Loading...</>;
-  } else {
-    return (
-      <div className="h-screen w-screen relative bg-gradient-to-r from-compat_l to-compat_r">
-        <Head>
-          <title>Ad Astra</title>
-        </Head>
-        <Navbar data={userData} />
-        <Compatibility_Component userData={userData} />
-      </div>
-    );
-  }
+  return (
+    <>
+      <AnimatePresence exitBeforeEnter>
+        {loading && (
+          <motion.div key={"loading_tab"} exit={{ opacity: 0 }}>
+            <Loading />
+          </motion.div>
+        )}
+
+        {!loading && (
+          <motion.div
+            key={"loaded"}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div className="h-screen w-screen relative bg-gradient-to-r from-compat_l to-compat_r">
+              <Head>
+                <title>Ad Astra</title>
+              </Head>
+              <Navbar data={userData} />
+              <Compatibility_Component userData={userData} />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
 }
