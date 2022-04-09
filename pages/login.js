@@ -3,6 +3,7 @@ import OnboardingNavBar from "../components/navbar_onboarding";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import bcrypt from "bcryptjs";
+import Router from "next/router";
 
 import cookie from "js-cookie";
 
@@ -36,41 +37,12 @@ export default function Login() {
     handleLogin(data);
   };
 
-  function checkCookie() {
-    const router = useRouter();
-
-    console.log(cookie.get("firstTime"));
-
-    if (cookie.get("firstTime") === undefined) {
-      addFirstTimeCookie();
-
-      useEffect(() => {
-        setTimeout(() => {
-          router.push("/onboarding");
-        }, 500);
-      }, []);
-    }
-  }
-
-  // For testing
-  function addFirstTimeCookie() {
-    cookie.set("firstTime", "1", { expires: 1 / 24 });
-  }
-
-  // For testing
-  function removeCookie() {
-    cookie.remove("firstTime");
-  }
-
   async function handleLogin(data) {
     setLoading(true);
     try {
       await login(data["email"], data["password"]);
       setLoading(false);
-      console.log("Login Successful!");
-      addCookie(data["email"]);
-
-      window.location.replace("/");
+      Router.push("/");
     } catch (e) {
       if (e.code === "auth/wrong-password") setError(1);
       else if (e.code === "auth/user-not-found") setError(2);
