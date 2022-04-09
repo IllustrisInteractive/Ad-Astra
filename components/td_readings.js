@@ -212,7 +212,7 @@ const Readings = (props) => {
       <MessengerCustomerChat
         pageId="102233909130277"
         appId="703682774401709"
-    />,
+    />
 
     </div>
   );
