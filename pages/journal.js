@@ -5,6 +5,8 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import ContentEditable from "react-contenteditable";
 
+import MessengerCustomerChat from 'react-messenger-customer-chat';
+
 import { useRef, useState } from "react";
 import {
   signup,
@@ -310,6 +312,11 @@ const JournalUI = (props) => {
                   />
                 </>
               )}
+
+        <MessengerCustomerChat
+                pageId="102233909130277"
+                appId="703682774401709"
+            />,
             </div>
           </>
         ) : (
