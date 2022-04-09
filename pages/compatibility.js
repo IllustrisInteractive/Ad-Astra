@@ -67,7 +67,7 @@ export default function Compatibility() {
     return <>Loading...</>;
   } else {
     return (
-      <div className="h-screen w-screen relative bg-gradient-to-r from-readings_l to-readings_r">
+      <div className="h-screen w-screen relative bg-gradient-to-r from-compat_l to-compat_r">
         <Head>
           <title>Ad Astra</title>
         </Head>
