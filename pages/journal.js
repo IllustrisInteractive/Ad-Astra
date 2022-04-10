@@ -5,8 +5,9 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import ContentEditable from "react-contenteditable";
 
-import MessengerCustomerChat from 'react-messenger-customer-chat';
+import MessengerCustomerChat from "react-messenger-customer-chat";
 import { TailSpin } from "react-loader-spinner";
+import Loading from "../components/loading";
 
 import { useRef, useState } from "react";
 import {
@@ -268,23 +269,21 @@ const JournalUI = (props) => {
   return (
     <div className="h-3/4">
       <div className="grid grid-cols-7 gap-x-2 mx-16 lg:mx-24 2xl:mx-64 h-full items-center">
-        {ui_data.ready ? (
+        {ui_data.ready && (
           <>
             <div className="col-span-2 p-3">
               <div className="flex flex-col items-center justify-center mb-3">
                 <a onClick={addEntry}>Add new Entry</a>
               </div>
               <div className="flex flex-col space-y-2">
-                {ui_data.entries.length > 0 ? <EntryButtons /> : ""}
+                {ui_data.entries.length > 0 && <EntryButtons />}
               </div>
             </div>
             <div
               className="col-span-5 p-5 rounded bg-white"
               style={{ maxHeight: "600px", height: "600px" }}
             >
-              {ui_data.active < 0 ? (
-                <></>
-              ) : (
+              {ui_data.active > 0 && (
                 <>
                   <ContentEditable
                     className="text-2xl font-bold"
@@ -313,18 +312,13 @@ const JournalUI = (props) => {
                   />
                 </>
               )}
-
-        <MessengerCustomerChat
+              <MessengerCustomerChat
                 pageId="102233909130277"
                 appId="703682774401709"
-            />,
+              />
+              ,
             </div>
           </>
-        ) : (
-          <div className="w-screen h-screen flex flex-col space-y-5 justify-center items-center">
-          <TailSpin color="#00BFFF" height={80} width={80} />
-          <div className="text-gray-400">Loading your experience</div>
-        </div>
         )}
       </div>
     </div>

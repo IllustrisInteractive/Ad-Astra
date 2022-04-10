@@ -2,9 +2,12 @@ import React, { Component, useState } from "react";
 import Image from "next/image";
 import dataJSON from "../pages/data.json";
 
-import MessengerCustomerChat from 'react-messenger-customer-chat';
+import MessengerCustomerChat from "react-messenger-customer-chat";
+import { generateShareableFirebase } from "../modules/firebase";
 
 const Readings = (props) => {
+  const [shareableModal, setShareable] = useState(false);
+  const [link, setLink] = useState("");
   let date = new Date();
   let symbol = props.userData.zodiac;
   let matches = [];
@@ -60,6 +63,30 @@ const Readings = (props) => {
     },
   };
 
+  function generateShareableLink() {
+    console.log("Generating link for", props.userData);
+    const doc = generateShareableFirebase(props.userData.id, {
+      zodiac: props.userData.zodiac,
+      fName: props.userData.fName,
+      lName: props.userData.lName,
+      date: getDateInFormat(true),
+      summary:
+        dataJSON.Reading[symbol][getToday()] != ""
+          ? dataJSON.Reading[symbol][getToday()]
+          : "No readings found for your zodiac sign today.",
+      matches: matches,
+    }).then((string) => {
+      props.setCurtain(true);
+      setShareable(!shareableModal);
+      setLink(string);
+    });
+  }
+
+  function closeModal() {
+    props.setCurtain(false);
+    setShareable(false);
+  }
+
   const getToday = () => {
     let day = "";
     let year = date.getFullYear();
@@ -88,7 +115,7 @@ const Readings = (props) => {
     return day;
   };
 
-  const getDateInFormat = () => {
+  const getDateInFormat = (type = false) => {
     let day = "";
     let month = "";
     let dayOfMonth = date.getDate();
@@ -149,18 +176,57 @@ const Readings = (props) => {
         month = "December";
     }
 
-    return (
-      <p className="text-white font-extralight">
-        <b className="font-bold">{day}</b> | {`${month} ${dayOfMonth} ${year}`}
-      </p>
-    );
+    if (!type)
+      return (
+        <p className="text-white font-extralight">
+          <b className="font-bold">{day}</b> |{" "}
+          {`${month} ${dayOfMonth} ${year}`}
+        </p>
+      );
+    else
+      return {
+        day: day,
+        month: month,
+        dayOfMonth: dayOfMonth,
+        year: year,
+      };
   };
 
   return (
     <div
-      className="mx-16 lg:mx-24 2xl:mx-64 grid grid-cols-2"
+      className="mx-16 lg:mx-24 2xl:mx-64 grid grid-cols-2 relative"
       style={{ minHeight: "600px" }}
     >
+      {shareableModal && (
+        <div className="h-full w-full absolute flex items-center justify-center z-20">
+          <div
+            className="bg-white p-5 rounded-lg relative"
+            style={{ minWidth: "700px" }}
+          >
+            <div className="grid grid-cols-2 items-center mb-5">
+              <div className="col-span-1">
+                <h2 className="font-bold text-2xl font-number">
+                  Here's your shareable link.
+                </h2>
+                <p>
+                  Send this link to your friends to share your Ad Astra daily
+                  summary.
+                </p>
+              </div>
+
+              <div className="col-span-1 flex justify-end">
+                <div
+                  className="bg-red-600 text-white p-3 rounded-lg"
+                  onClick={closeModal}
+                >
+                  Close
+                </div>
+              </div>
+            </div>
+            <div className="bg-gray-300 p-3 rounded-lg">{`https://ad-astra-one.vercel.app/view/${link}`}</div>
+          </div>
+        </div>
+      )}
       <div className="col-span-1 flex flex-col items-center justify-center">
         <img
           src={symbols[symbol.toLowerCase()].link}
@@ -169,7 +235,16 @@ const Readings = (props) => {
         <h2 className="text-white font-light text-3xl">{symbol}</h2>
       </div>
       <div className="col-span-1 flex flex-col h-full justify-center">
-        {getDateInFormat()} {/* date */}
+        <div className="flex flex-row relative">
+          {getDateInFormat()} {/* date */}
+          <a
+            className="absolute right-0 font-number font-bold text-white"
+            onClick={generateShareableLink}
+          >
+            Get shareable link
+          </a>
+        </div>
+
         <p className="mt-3 text-xl text-white font-light">
           {dataJSON.Reading[symbol][getToday()] != ""
             ? dataJSON.Reading[symbol][getToday()]
@@ -208,12 +283,7 @@ const Readings = (props) => {
           </div>
         </div>
       </div>
-
-      <MessengerCustomerChat
-        pageId="102233909130277"
-        appId="703682774401709"
-    />,
-
+      <MessengerCustomerChat pageId="102233909130277" appId="703682774401709" />
     </div>
   );
 };

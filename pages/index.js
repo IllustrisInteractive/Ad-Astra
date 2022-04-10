@@ -28,6 +28,7 @@ import Loading from "../components/loading";
 const Home = (props) => {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState();
+  const [curtain, setCurtain] = useState(false);
   const [userData, setUserData] = useState({
     fName: "John",
     lName: "Doe",
@@ -82,12 +83,15 @@ const Home = (props) => {
             exit={{ opacity: 0 }}
           >
             <div className="h-screen w-screen relative bg-gradient-to-r from-readings_l to-readings_r">
+              {curtain && (
+                <div className="h-full w-full bg-black/50 absolute z-10" />
+              )}
               <Head>
                 <title>Ad Astra</title>
               </Head>
               <Navbar data={userData} />
 
-              <Readings userData={userData} />
+              <Readings userData={userData} setCurtain={setCurtain} />
             </div>
           </motion.div>
         )}
