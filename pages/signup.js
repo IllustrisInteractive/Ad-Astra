@@ -11,6 +11,8 @@ import { collection, doc, setDoc, getDocs } from "firebase/firestore";
 import { signup } from "../modules/firebase";
 import Head from "next/head";
 
+import Moment from 'moment';
+
 export default function Signup() {
   // Firebase
   const [loading, setLoading] = useState(false);
@@ -27,17 +29,19 @@ export default function Signup() {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
 
+  let initial = false;
+
   const handleInput = (event) => {
     setEmail(event.target.value);
   };
 
   async function handleSignup(data) {
     setLoading(true);
-    // try {
+    try {
     await signup(data);
-    // } catch {
-    // alert("Error!");
-    // }
+    } catch(e) {
+    alert(e);
+    }
     setLoading(false);
 
     console.log("Signup Successful");
@@ -48,18 +52,23 @@ export default function Signup() {
     setCity_id(value);
   };
   const upload = (data) => {
+    setLoading(true);
     setFormErrors(checkData(formValues));
     setIsSubmit(true);
-
-    
 
     console.log('hello');
     console.log(Object.keys(formErrors).length);
     console.log(formErrors);
     console.log(formValues);
 
-    if(Object.keys(formErrors).length === 0) {
-      handleSignup(formValues);
+    try {
+      if(Object.keys(formErrors).length === 0) {
+        handleSignup(formValues);
+      }
+    } catch (e) {
+      if(e.code === "auth/invalid-email") {
+        console.log(e.code);
+      }
     }
     
   };
@@ -109,6 +118,20 @@ export default function Signup() {
 
   };
 
+  function formatDate(date) {
+    let uDate = new Date(date);
+
+    let uMonth = uDate.getMonth() + 1;
+    let uDay = uDate.getDate();
+    let uYear = uDate.getFullYear();
+
+    if(isNaN(uMonth)) {
+      return '';
+    } else {
+      return `${uMonth}/${uDay}/${uYear}`;
+    }
+  };
+
 
   useEffect(() => {
     console.log(formErrors);
@@ -123,11 +146,7 @@ export default function Signup() {
         <title>Sign Up | Ad Astra</title>
       </Head>
       <OnboardingNavBar />
-      {Object.keys(formErrors).length === 0 && isSubmit ? (<div className="ui message success">Signed in Successfully</div>) :
-      (
-        <pre>{JSON.stringify(formValues, undefined, 2)}</pre>
-      )
-      }
+
       <div className="mx-8 xl:mx-16 2xl:mx-64 grid grid-rows-2 lg:grid-cols-1 lg:grid-rows-none justify-items-center items-center lg:h-3/4">
         <div className="row-span-1 lg:col-span-1 grow-0 p-5">
           <div className="font-bold text-4xl text-white text-center">
@@ -156,7 +175,7 @@ export default function Signup() {
                     // {...register("fname", { required: true })}
 
                   ></input>
-                  <p>{ formErrors.fname }</p>
+                  <p className="text-red-600" >{ formErrors.fname }</p>
                 </div>
                 <div className="col-span-1 space-y-2">
                   <label>Last Name</label>
@@ -170,7 +189,7 @@ export default function Signup() {
                     onChange = { handleChange }
                     // {...register("lname", { required: true })}
                   ></input>
-                   <p>{ formErrors.lname }</p>
+                   <p className="text-red-600" >{ formErrors.lname }</p>
                 </div>
               </div>{" "}
               {/* name div */}
@@ -188,7 +207,7 @@ export default function Signup() {
                       onChange = { handleChange }
                       // {...register("email", { required: true })}
                     ></input>
-                     <p>{ formErrors.email }</p>
+                     <p className="text-red-600" >{ formErrors.email }</p>
                   </div>
                 </div>
               </div>
@@ -205,7 +224,7 @@ export default function Signup() {
                     onChange = { handleChange }
                     // {...register("password", { required: true })}
                   ></input>
-                   <p>{ formErrors.password }</p>
+                   <p className="text-red-600" >{ formErrors.password }</p>
                 </div>
               </div>
               <div className="space-y-2">
@@ -224,14 +243,15 @@ export default function Signup() {
                       name="date"
                       // onChange={(date) => field.onChange(date)}
                       onChange={changeDate}
-                      
+                      value = { formatDate(formValues.date) }
                       selected={field.value}
+
                     />
                   )}
                 />
                 
               </div>
-              <p>{ formErrors.date }</p>
+              <p className="text-red-600" >{ formErrors.date }</p>
               <div>
                 <div className="space-y-2"></div>
               </div>
