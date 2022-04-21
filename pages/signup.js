@@ -11,21 +11,27 @@ import { collection, doc, setDoc, getDocs } from "firebase/firestore";
 import { signup } from "../modules/firebase";
 import Head from "next/head";
 
-import Moment from 'moment';
+import Moment from "moment";
 
 export default function Signup() {
   // Firebase
   const [loading, setLoading] = useState(false);
 
-  const { control, register, handleSubmit} = useForm();
+  const { control, register, handleSubmit } = useForm();
   const city = 1;
   const [city_id, setCity_id] = useState(0);
 
   const [email, setEmail] = useState(" ");
+  const [errorState, setError] = useState("");
 
-
-  const initialValues = { email: "", password: "", fname: "", lname: "", date: ""};
-  const [ formValues, setFormValues ] = useState(initialValues);
+  const initialValues = {
+    email: "",
+    password: "",
+    fname: "",
+    lname: "",
+    date: "",
+  };
+  const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
 
@@ -38,13 +44,11 @@ export default function Signup() {
   async function handleSignup(data) {
     setLoading(true);
     try {
-    await signup(data);
-    } catch(e) {
-    alert(e);
+      await signup(data);
+    } catch (e) {
+      setErrorToState(e.code);
     }
     setLoading(false);
-
-    console.log("Signup Successful");
   }
 
   const setCity = (value) => {
@@ -56,34 +60,30 @@ export default function Signup() {
     setFormErrors(checkData(formValues));
     setIsSubmit(true);
 
-    console.log('hello');
-    console.log(Object.keys(formErrors).length);
-    console.log(formErrors);
-    console.log(formValues);
-
     try {
-      if(Object.keys(formErrors).length === 0) {
+      if (Object.keys(formErrors).length == 0) {
         handleSignup(formValues);
       }
     } catch (e) {
-      if(e.code === "auth/invalid-email") {
-        console.log(e.code);
-      }
+      setErrorToState(e.code);
     }
-    
   };
 
+  const setErrorToState = (code) => {
+    if (code == "auth/invalid-email") {
+      setError("Wrong email format.");
+    } else if (code == "auth/email-already-exists") {
+      setError("Email already taken.");
+    }
+  };
   const handleChange = (e) => {
-
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
-
   };
 
   function changeDate(date) {
     setFormValues({ ...formValues, date: date });
-  };
-
+  }
 
   const checkData = (values) => {
     const errors = {};
@@ -115,7 +115,6 @@ export default function Signup() {
     }
 
     return errors;
-
   };
 
   function formatDate(date) {
@@ -125,20 +124,19 @@ export default function Signup() {
     let uDay = uDate.getDate();
     let uYear = uDate.getFullYear();
 
-    if(isNaN(uMonth)) {
-      return '';
+    if (isNaN(uMonth)) {
+      return "";
     } else {
       return `${uMonth}/${uDay}/${uYear}`;
     }
-  };
-
+  }
 
   useEffect(() => {
     console.log(formErrors);
-    if(Object.keys(formErrors).length === 0 && isSubmit) {
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(formValues);
     }
-  }, [formErrors])
+  }, [formErrors]);
 
   return (
     <div className="h-screen bg-gradient-to-r from-log_l via_log_m to-log_r">
@@ -157,6 +155,11 @@ export default function Signup() {
           </div>
           <div style={{ height: "60px" }} />
           <div className="p-6 shadow-lg rounded-lg bg-white">
+            {errorState != "" && (
+              <div className="bg-red-600 text-white font-bold text-center p-2 rounded mb-3">
+                {errorState}
+              </div>
+            )}
             <form
               className="space-y-4"
               onSubmit={handleSubmit((data) => upload(data))}
@@ -170,12 +173,11 @@ export default function Signup() {
                     type="first_name"
                     placeholder="John"
                     name="fname"
-                    value= { formValues.fname }
-                    onChange = { handleChange }
+                    value={formValues.fname}
+                    onChange={handleChange}
                     // {...register("fname", { required: true })}
-
                   ></input>
-                  <p className="text-red-600" >{ formErrors.fname }</p>
+                  <p className="text-red-600">{formErrors.fname}</p>
                 </div>
                 <div className="col-span-1 space-y-2">
                   <label>Last Name</label>
@@ -185,11 +187,11 @@ export default function Signup() {
                     type="last_name"
                     placeholder="Doe"
                     name="lname"
-                    value= { formValues.lname }
-                    onChange = { handleChange }
+                    value={formValues.lname}
+                    onChange={handleChange}
                     // {...register("lname", { required: true })}
                   ></input>
-                   <p className="text-red-600" >{ formErrors.lname }</p>
+                  <p className="text-red-600">{formErrors.lname}</p>
                 </div>
               </div>{" "}
               {/* name div */}
@@ -203,11 +205,11 @@ export default function Signup() {
                       type="email"
                       placeholder="johndoe@adastra.ph"
                       name="email"
-                      value= { formValues.email }
-                      onChange = { handleChange }
+                      value={formValues.email}
+                      onChange={handleChange}
                       // {...register("email", { required: true })}
                     ></input>
-                     <p className="text-red-600" >{ formErrors.email }</p>
+                    <p className="text-red-600">{formErrors.email}</p>
                   </div>
                 </div>
               </div>
@@ -220,11 +222,11 @@ export default function Signup() {
                     type="password"
                     placeholder="Password"
                     name="password"
-                    value= { formValues.password }
-                    onChange = { handleChange }
+                    value={formValues.password}
+                    onChange={handleChange}
                     // {...register("password", { required: true })}
                   ></input>
-                   <p className="text-red-600" >{ formErrors.password }</p>
+                  <p className="text-red-600">{formErrors.password}</p>
                 </div>
               </div>
               <div className="space-y-2">
@@ -243,22 +245,21 @@ export default function Signup() {
                       name="date"
                       // onChange={(date) => field.onChange(date)}
                       onChange={changeDate}
-                      value = { formatDate(formValues.date) }
+                      value={formatDate(formValues.date)}
                       selected={field.value}
-
                     />
                   )}
                 />
-                
               </div>
-              <p className="text-red-600" >{ formErrors.date }</p>
+              <p className="text-red-600">{formErrors.date}</p>
               <div>
                 <div className="space-y-2"></div>
               </div>
               <div>
                 <button
                   class="shadow bg-[#8A2387] hover:bg-[#9D50BB] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded w-full"
-                  type="submit" onClick={ checkData }
+                  type="submit"
+                  onClick={checkData}
                 >
                   Sign up
                 </button>
