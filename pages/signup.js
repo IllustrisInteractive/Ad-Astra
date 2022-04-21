@@ -145,12 +145,6 @@ export default function Signup() {
       </Head>
       <OnboardingNavBar />
 
-      {Object.keys(formErrors).length === 0 && isSubmit ? (
-        <div className="ui message success">Signed in Successfully</div>
-      ) : (
-        <pre>{JSON.stringify(formValues, undefined, 2)}</pre>
-      )}
-
       <div className="mx-8 xl:mx-16 2xl:mx-64 grid grid-rows-2 lg:grid-cols-1 lg:grid-rows-none justify-items-center items-center lg:h-3/4">
         <div className="row-span-1 lg:col-span-1 grow-0 p-5">
           <div className="font-bold text-4xl text-white text-center">
