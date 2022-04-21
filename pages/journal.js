@@ -183,6 +183,22 @@ const JournalUI = (props) => {
     setUI(ui_data_copy);
   };
 
+  const deleteCurrent = (e) => {
+    let ui_data_copy = structuredClone(ui_data);
+    if (ui_data_copy.active != -1) {
+      const queryIndex = -1;
+
+      for (let i = 0; i < ui_data_copy.entries.length; i++) {
+        if (ui_data_copy.entries[i].id == ui_data_copy.active) queryIndex = i;
+      }
+      alert(queryIndex);
+      ui_data_copy.active = -1;
+      ui_data_copy.entries.splice(queryIndex, 1);
+      packageThenPost(userData.id, ui_data_copy.entries);
+      setUI(ui_data_copy);
+    }
+  };
+
   const changeActive = (e) => {
     console.log("ID: ", e.target.id);
     let query = ui_data.entries.find((entry) => entry.id == e.target.id);
@@ -280,9 +296,16 @@ const JournalUI = (props) => {
               </div>
             </div>
             <div
-              className="col-span-5 p-5 rounded bg-white"
+              className="col-span-5 p-5 rounded bg-white relative"
               style={{ maxHeight: "600px", height: "600px" }}
             >
+              <button
+                className="absolute top-5 right-5 opacity-75"
+                style={{ height: "24px" }}
+                onClick={deleteCurrent}
+              >
+                <img src="/bin.png" className="h-full" />
+              </button>
               {ui_data.active > 0 && (
                 <>
                   <ContentEditable
