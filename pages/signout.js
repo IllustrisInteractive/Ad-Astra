@@ -12,7 +12,9 @@ import OnboardingNavBar from "../components/navbar_onboarding";
 
 export const SignOut = (props) => {
   useEffect(() => {
-    window.location.replace("/login");
+    logout().then(() => {
+      window.location.replace("/login");
+    });
   }, []);
   return <></>;
 };
