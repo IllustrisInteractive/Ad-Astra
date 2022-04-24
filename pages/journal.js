@@ -25,6 +25,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 export default function Journal() {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState();
+
   const [userData, setUserData] = useState({
     fName: "John",
     lName: "Doe",
@@ -79,6 +80,7 @@ export default function Journal() {
 }
 
 const JournalUI = (props) => {
+  const [readyToPost, setReady] = useState(false);
   const userData = props.userData;
   Date.prototype.today = function () {
     return (
@@ -152,8 +154,6 @@ const JournalUI = (props) => {
       );
     }
 
-    packageThenPost(userData.id, ui_data.entries);
-
     let newDate = new Date();
     let datetime = newDate.today() + " at " + newDate.timeNow();
     let ui_data_copy = structuredClone(ui_data);
@@ -163,7 +163,15 @@ const JournalUI = (props) => {
     ui_data_copy.hasChanges = false;
     setUI(ui_data_copy);
     console.log(ui_data);
+    setReady(true);
   };
+
+  useEffect(() => {
+    if (readyToPost) {
+      packageThenPost(userData.id, ui_data.entries);
+      setReady(false);
+    }
+  }, [readyToPost]);
 
   const addEntry = () => {
     let ui_data_copy = structuredClone(ui_data);
@@ -180,6 +188,8 @@ const JournalUI = (props) => {
     ui_data_copy.entries.unshift(entryToAdd);
     ui_data_copy.active = entryToAdd.id;
     console.log(ui_data_copy);
+    titleText.current = "";
+    contentText.current = "";
     setUI(ui_data_copy);
   };
 
@@ -268,6 +278,8 @@ const JournalUI = (props) => {
     if (!ui_data.ready) {
       let entriesToAdd = await retrieveEntries(userData.id);
       if (entriesToAdd) {
+        titleText.current = entriesToAdd.entries[0].title;
+        contentText.current = entriesToAdd.entries[0].elements.content;
         setUI({
           entries: entriesToAdd.entries,
           ready: true,
@@ -291,7 +303,10 @@ const JournalUI = (props) => {
               <div className="flex flex-col items-center justify-center mb-3">
                 <a onClick={addEntry}>Add new Entry</a>
               </div>
-              <div className="flex flex-col space-y-2">
+              <div
+                className="flex flex-col space-y-2 overflow-y-auto"
+                style={{ maxHeight: "600px" }}
+              >
                 {ui_data.entries.length > 0 && <EntryButtons />}
               </div>
             </div>
