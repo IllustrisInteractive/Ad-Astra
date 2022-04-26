@@ -35,6 +35,8 @@ export default function Signup() {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
 
+  const lastDateOfYear = `12/31/${new Date().getFullYear()}`;
+
   let initial = false;
 
   const handleInput = (event) => {
@@ -98,9 +100,9 @@ export default function Signup() {
 
     if (!values.password) {
       errors.password = "Password is required";
-    } else if (values.password < 8) {
+    } else if (values.password.length < 8) {
       errors.password = "Password must be more than 8 characters.";
-    } else if (values.password > 32) {
+    } else if (values.password.length > 32) {
       errors.password = "Password cannot exceed more than 32 characters";
     }
 
@@ -243,6 +245,8 @@ export default function Signup() {
                       placeholderText="Select date"
                       id="date"
                       name="date"
+                      minDate={new Date("02-01-1950")}
+                      maxDate={new Date("04-28-2022")}
                       // onChange={(date) => field.onChange(date)}
                       onChange={changeDate}
                       value={formatDate(formValues.date)}
