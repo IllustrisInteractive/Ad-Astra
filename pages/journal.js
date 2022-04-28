@@ -201,7 +201,6 @@ const JournalUI = (props) => {
       for (let i = 0; i < ui_data_copy.entries.length; i++) {
         if (ui_data_copy.entries[i].id == ui_data_copy.active) queryIndex = i;
       }
-      alert(queryIndex);
       ui_data_copy.active = -1;
       ui_data_copy.entries.splice(queryIndex, 1);
       packageThenPost(userData.id, ui_data_copy.entries);
@@ -277,7 +276,7 @@ const JournalUI = (props) => {
     //retrieve data from firebase here then set as entries with setEntries
     if (!ui_data.ready) {
       let entriesToAdd = await retrieveEntries(userData.id);
-      if (entriesToAdd) {
+      if (entriesToAdd && entriesToAdd.entries.length > 0) {
         titleText.current = entriesToAdd.entries[0].title;
         contentText.current = entriesToAdd.entries[0].elements.content;
         setUI({

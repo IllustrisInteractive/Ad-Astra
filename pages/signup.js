@@ -72,8 +72,10 @@ export default function Signup() {
   const setErrorToState = (code) => {
     if (code == "auth/invalid-email") {
       setError("Wrong email format.");
-    } else if (code == "auth/email-already-exists") {
+    } else if (code == "auth/email-already-in-use") {
       setError("Email already taken.");
+    } else {
+      setError(code);
     }
   };
   const handleChange = (e) => {
