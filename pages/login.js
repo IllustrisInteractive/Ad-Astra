@@ -105,8 +105,7 @@ export default function Login() {
     }
   }, [formErrors])
 
-  return (
-    <>
+  return (    
       <div className="h-screen bg-gradient-to-r from-log_l via_log_m to-log_r">
         <Head>
           <title>Log In | Ad Astra</title>
@@ -192,6 +191,6 @@ export default function Login() {
           </div>
         </div>
       </div>
-    </>
+
   );
 }
