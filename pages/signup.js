@@ -88,6 +88,9 @@ export default function Signup() {
   }
 
   const checkData = (values) => {
+
+
+
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
@@ -156,7 +159,7 @@ export default function Signup() {
             Fill up the sign up form to create an account now.
           </div>
           <div style={{ height: "60px" }} />
-          <div className="p-6 shadow-lg rounded-lg bg-white">
+          <div className="p-6 shadow-lg mb-56 rounded-lg bg-white">
             {errorState != "" && (
               <div className="bg-red-600 text-white font-bold text-center p-2 rounded mb-3">
                 {errorState}
