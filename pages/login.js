@@ -31,6 +31,8 @@ export default function Login() {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
 
+  const errors = {};
+
 
   /* ERROR CODES
   0 - Initial state, no error.
@@ -69,7 +71,7 @@ export default function Login() {
   }
 
   const checkData = (values) => {
-    const errors = {};
+    errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
     if (!values.password) {
@@ -120,13 +122,13 @@ export default function Login() {
           <div style={{ height: "60px" }} />
           <div className="p-6 shadow-lg rounded-lg bg-white">
             {error > 0 ? (
-              <div className="bg-red-600 p-3 text-white rounded text-center font-bold mb-3 text-sm">
+              <div className="bg-white p-1 text-white rounded text-center font-bold mb-3 text-sm">
                 <p>
                   {error == 1
-                    ? "Wrong password entered."
+                    ? errors.email = "Wrong password entered."
                     : error == 2
-                    ? "No account exists for this email."
-                    : "Please fill up all the fields."}
+                    ? errors.email = "No account exists for this email."
+                    : ""}
                 </p>
               </div>
             ) : (

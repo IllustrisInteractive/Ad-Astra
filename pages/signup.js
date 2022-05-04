@@ -37,7 +37,11 @@ export default function Signup() {
 
   const lastDateOfYear = `12/31/${new Date().getFullYear()}`;
 
+  let fbError = "";
+
   let initial = false;
+
+  const errors = {};
 
   const handleInput = (event) => {
     setEmail(event.target.value);
@@ -45,10 +49,26 @@ export default function Signup() {
 
   async function handleSignup(data) {
     setLoading(true);
+
+    if (Object.keys(formErrors).length == 0 && !data.fname == false && !data.fname == false) {
+      try {
+        await signup(data);
+      } catch (e) {
+        setErrorToState(e.code);
+        // alert(e);
+      }
+    }
+
+    setLoading(false);
+  }
+
+  async function tempSignup(data) {
+    setLoading(true);
     try {
       await signup(data);
     } catch (e) {
       setErrorToState(e.code);
+      // alert(e);
     }
     setLoading(false);
   }
@@ -72,14 +92,23 @@ export default function Signup() {
   };
 
   const setErrorToState = (code) => {
+
+    let sample = ''
+
     if (code == "auth/invalid-email") {
-      setError("Wrong email format.");
+      // setError("Wrong email format.");
+      // alert("Wrong email format.");
+      errors.email = "Wrong email format.";
     } else if (code == "auth/email-already-in-use") {
-      setError("Email already taken.");
+      // setError("Email already taken.");
+      // alert("Email already taken.");
+      errors.email = "Email already taken.";
     } else {
       setError(code);
     }
   };
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
@@ -91,9 +120,9 @@ export default function Signup() {
 
   const checkData = (values) => {
 
+    // console.log(`CHECKDATA: ${!values.fname}`);
 
-
-    const errors = {};
+    errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
     if (!values.fname) {
@@ -109,7 +138,7 @@ export default function Signup() {
       errors.password = "Password must be more than 8 characters.";
     } else if (values.password.length > 32) {
       errors.password = "Password cannot exceed more than 32 characters";
-    }
+    } 
 
     if (!values.date) {
       errors.date = "Date of birth is required";
@@ -117,9 +146,7 @@ export default function Signup() {
 
     if (!values.email) {
       errors.email = "Email is required";
-    } else if (!regex.test(values.email)) {
-      errors.email = "This is not a valid email format.";
-    }
+    } 
 
     return errors;
   };
@@ -162,11 +189,11 @@ export default function Signup() {
           </div>
           <div style={{ height: "60px" }} />
           <div className="p-6 shadow-lg mb-56 rounded-lg bg-white">
-            {errorState != "" && (
+            {/* {errorState != "" && (
               <div className="bg-red-600 text-white font-bold text-center p-2 rounded mb-3">
                 {errorState}
               </div>
-            )}
+            )} */}
             <form
               className="space-y-4"
               onSubmit={handleSubmit((data) => upload(data))}
