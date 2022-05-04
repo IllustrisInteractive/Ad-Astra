@@ -121,14 +121,14 @@ export default function Login() {
           </div>
           <div style={{ height: "60px" }} />
           <div className="p-6 shadow-lg rounded-lg bg-white">
-            {error > 0 ? (
-              <div className="bg-white p-1 text-white rounded text-center font-bold mb-3 text-sm">
+          {error > 0 ? (
+              <div className="bg-red-600 p-3 text-white rounded text-center font-bold mb-3 text-sm">
                 <p>
                   {error == 1
-                    ? errors.email = "Wrong password entered."
+                    ? "Wrong password entered."
                     : error == 2
-                    ? errors.email = "No account exists for this email."
-                    : ""}
+                    ? "No account exists for this email."
+                    : "Please fill up all the fields."}
                 </p>
               </div>
             ) : (
