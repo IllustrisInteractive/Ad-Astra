@@ -278,7 +278,7 @@ export default function Signup() {
                       id="date"
                       name="date"
                       minDate={new Date("02-01-1950")}
-                      maxDate={new Date("04-28-2022")}
+                      maxDate={new Date("05-05-2022")}
                       // onChange={(date) => field.onChange(date)}
                       onChange={changeDate}
                       value={formatDate(formValues.date)}
