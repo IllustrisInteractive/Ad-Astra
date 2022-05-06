@@ -67,7 +67,7 @@ export default function Journal() {
     return <>Loading...</>;
   } else {
     return (
-      <div className="h-max w-screen relative bg-gradient-to-r from-journal_l to-journal_r">
+      <div className="h-screen w-screen relative bg-gradient-to-r from-journal_l to-journal_r">
         <Head>
           <title>My Journal | Ad Astra</title>
         </Head>
